@@ -9,7 +9,7 @@ Nome: Lucas Roges de Araujo
 | --------------------------------------------------------- | --------------------- | --------------- |
 | Nome/Título                                               | SuperMUC-NG | Dell Inspiron 5567 |
 | Imagem (foto, diagrama, screenshot, etc.)                 | <img src="https://doku.lrz.de/download/attachments/29164337/SuperMUC-NG-small.jpg?version=30&modificationDate=1552666200667&api=v2" width="96"> <img src="https://doku.lrz.de/download/attachments/34013186/SuperMUC-NG_computenode.png?version=1&modificationDate=1552410242253&api=v2" width="96"> | <img src="https://souqcms.s3.amazonaws.com/spring/images/2017/Dell/inspiron-5567-laptop/3-dell-inspiron-5567-laptop-core-i7-15.6-inch-glossy-black.jpg" width="96"> <img src="https://raw.githubusercontent.com/lucasroges/elc139-2019a/master/trabalhos/t1/lstopo.png" width="96"> |
-| Classificação de Flynn                                    | MIMD | MIMD |
+| Classificação de Flynn                                    | MIMD SIMD | MIMD |
 | Memória: compartilhada, distribuída ou ambas?             | Ambas | Compartilhada |
 | Número total de núcleos de processamento                  | 305,856 | 2 núcleos (4 threads) |
 | Fabricante e modelo do(s) processador(es)                 | Intel Xeon Platinum 8174 | Intel Core I7-7500U |
