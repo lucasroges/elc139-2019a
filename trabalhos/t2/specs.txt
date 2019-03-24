@@ -1,0 +1,5 @@
+Processador: AMD A8-5600K APU
+Núcleos de processamento: 4
+Frequência: 3.6GHz (turbo: 3.9GHz) 
+Memória: 8GB
+Sistema Operacional: Linux (Ubuntu 18.04)

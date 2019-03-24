@@ -27,12 +27,12 @@ pthread_mutex_t mutexsum;
 void *dotprod_worker(void *arg)
 {
    int i, k;
-   long offset = (long) arg;
+   long offset = (long) arg; // "id" de cada threads
    double *a = dotdata.a;
    double *b = dotdata.b;     
    int wsize = dotdata.wsize;
-   int start = offset*wsize;
-   int end = start + wsize;
+   int start = offset*wsize; // cálculo do índex inicial para a thread
+   int end = start + wsize; // cálculo do índex final para a thread
    double mysum;
 
    for (k = 0; k < dotdata.repeat; k++) {
