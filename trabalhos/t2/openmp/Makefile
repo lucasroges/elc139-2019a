@@ -15,7 +15,7 @@ all: $(TARGET)
 
 # Dependencias
 
-openmp_dotprod: openmp_dotprod.c
+openmp_dotprod: openmp_dotprod.cpp
 
 clean:
 	rm -f *.o *~ $(TARGET)

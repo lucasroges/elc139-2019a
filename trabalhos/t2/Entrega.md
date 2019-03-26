@@ -3,20 +3,23 @@
 Programação Paralela Multithread
 --------------------------------
 
-Nome: Lucas Roges de Araujo
+- Nome: Lucas Roges de Araujo
+- Disciplina: Programação Paralela
 --------------------------------
 
-Especificações da arquitetura utilizada em [specs.txt](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/specs.txt)
+- Especificações da arquitetura utilizada em [specs.txt](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/specs.txt)
 
-Topologia da arquitetura utilizada em [lstopo.png]()
+- Topologia da arquitetura utilizada em [lstopo.png]()
+
+- Casos testados e speedups obtidos em [results.csv](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/results.csv)
 
 ## Parte 1: Pthreads
 
-1. Particionamento: o particionamento dos cálculos ocorre dentro da função executada por cada thread. A variável de argumento passada para a função funciona como um id para cada thread e a partir desse id é calculado o índex inicial e final do vetor para realizar as multiplicações e a soma dos resultados dentro desse intervalo. Na divisão realizada, cada thread fica responsável por um intervalo de tamanho ```wsize```.
+1. Particionamento: o particionamento do problema (cálculos) ocorre dentro da função executada por cada thread. A variável de argumento passada para a função funciona como um id para cada thread e a partir desse id é calculado o index inicial e final do vetor para realizar as multiplicações e a soma dos resultados dentro desse intervalo. Na divisão realizada, cada thread fica responsável por um intervalo de tamanho ```wsize```.
    ```
-   long offset = (long) arg; // "id" de cada threads
-   int start = offset * wsize; // cálculo do índex inicial para a thread
-   int end = start + wsize; // cálculo do índex final para a thread
+   long offset = (long) arg; // "id" de cada uma das threads
+   int start = offset * wsize; // cálculo do index inicial para a thread
+   int end = start + wsize; // cálculo do index final para a thread
    ```
 
    Comunicação: não há comunicação entre as threads enquanto elas efetuam as multiplicações, elas apenas somam o valor encontrado, por cada uma delas, na variável global. O trecho de código abaixo mostra o momento em que as threads incrementam o valor da soma encontrada no valor total. A operação que ocorre em [pthreads_dotprod.c](pthreads_dotprod/pthreads_dotprod.c) utiliza mutex para garantir exclusividade a cada thread no momento de acessar e incrementar a variável que guarda a soma total.
@@ -30,9 +33,9 @@ Topologia da arquitetura utilizada em [lstopo.png]()
 
    Mapeamento: não há um mapeamento específico para os processadores, mas há um balanceamento de carga estático onde cada thread fica responsável por ```1/nthreads``` ou ```wsize``` das multiplicações, levando em consideração o tamanho total dos arrays.
 
-2. O speedup de 1 para 2 threads foi de 1.95, enquanto o speedup de 1 para 4 threads foi de 3.72 (speedup de 2 para 4 threads foi de 1.91)
+2. O speedup de 1 para 2 threads foi de 1.93, enquanto o speedup de 1 para 4 threads foi de 3.69 (o speedup de 2 para 4 threads foi de 1.91)
 
-3. 
+3. O speedup para os casos do Pthreads se mantém bem semelhantes para 2 threads e com pequenas alterações para 4 threads. A variação realizada contemplou 3 tamanhos de vetores (1\*10^6, 2\*10^6 e 4\*10^6) e 3 quantidades de repetições (2000, 4000 e 8000). Os resultados para esses casos podem ser vistos na tabela no [diretório do Pthreads](https://github.com/lucasroges/elc139-2019a/tree/master/trabalhos/t2/pthreads_dotprod).
 
 4. 
 
@@ -42,7 +45,7 @@ Topologia da arquitetura utilizada em [lstopo.png]()
 
 1. Código implementado em C++ e disponível em [openmp_dotprod.cpp](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/openmp/openmp\_dotprod.cpp).
 
-2. 
+2. Quanto ao speedup, para o caso de 2 threads é bem semelhante ao comportamento visto para o Pthreads, mas para 4 threads o speedup é mais baixo para todos os casos executados. Os resultados para esses casos podem ser vistos na tabela no [diretório do Pthreads](https://github.com/lucasroges/elc139-2019a/tree/master/trabalhos/t2/openmp).
 
 ## Referências
 
