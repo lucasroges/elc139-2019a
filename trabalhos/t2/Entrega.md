@@ -40,6 +40,7 @@ Programação Paralela Multithread
 3. O speedup para os casos do Pthreads se mantém bem semelhantes para 2 threads e com pequenas alterações para 4 threads. A variação realizada contemplou 3 tamanhos de vetores (1\*10^6, 2\*10^6 e 4\*10^6) e 3 quantidades de repetições (2000, 4000 e 8000). Os resultados para esses casos podem ser vistos no [diretório do Pthreads](https://github.com/lucasroges/elc139-2019a/tree/master/trabalhos/t2/pthreads_dotprod).
 
 4. Speedup observado:
+
 ![speedup_pthreads](pthreads_dotprod/speedup_pthreads.png)
 
 Tabela de speedup disponível no [diretório do Pthreads](https://github.com/lucasroges/elc139-2019a/tree/master/trabalhos/t2/pthreads_dotprod).
