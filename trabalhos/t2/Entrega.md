@@ -41,6 +41,7 @@ Programação Paralela Multithread
 
 4. Speedup observado:
 ![speedup_pthreads](pthreads_dotprod/speedup_pthreads.png)
+
 Tabela de speedup disponível no [diretório do Pthreads](https://github.com/lucasroges/elc139-2019a/tree/master/trabalhos/t2/pthreads_dotprod).
 
 5. A diferença entre os códigos é que [pthreads_dotprod.c](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/pthreads_dotprod/pthreads_dotprod.c) utiliza um mecanismo do POSIX Threads, o mutex. O mutex deve ser inicializado e ao ser invocado por uma thread, através do comando lock, fará com que a thread execute exclusivamente uma região de código, enquanto as outras aguardam o desbloqueio, através de unlock, para também poderem executar a região exclusiva e seguir o processamento paralelo após essa região de código. Normalmente, mutexes são usados em regiões de manipulação de variáveis globais (região crítica), que é o caso do código em questão. O código de [pthreads_dotprod2.c](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/pthreads_dotprod/pthreads_dotprod2.c) não utiliza esse mecanismo, mas pode executar corretamente desde que a leitura efetuada pelas threads não ocorra simultaneamente.
