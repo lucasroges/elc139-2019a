@@ -1,4 +1,4 @@
-[Programação Paralela](https://github.com/lucasroges/elc139-2019a) > T2 > OpenMP
+[Programação Paralela](https://github.com/lucasroges/elc139-2019a) > [T2](https://github.com/lucasroges/elc139-2019a/tree/master/trabalhos/t2) > OpenMP
 
 Programação Paralela Multithread
 --------------------------------
@@ -9,8 +9,8 @@ Programação Paralela Multithread
 
 ## Speedup para as execuções em OpenMP
 
-|Tamanho base|Repetições|2          |4          |4 (2 p/ 4) |
-|------------|----------|-----------|-----------|-----------|
+|Tamanho base|Repetições|     2     |     4     | 4 (2 p/ 4)|
+|:----------:|:--------:|:---------:|:---------:|:---------:|
 |1M          |2000      |1,931807183|2,58435371 |1,337790714|
 |1M          |4000      |1,969798061|3,325455916|1,688221743|
 |1M          |8000      |1,932992672|3,265911845|1,689562456|
@@ -20,3 +20,5 @@ Programação Paralela Multithread
 |4M          |2000      |1,927580988|3,236167612|1,678875041|
 |4M          |4000      |1,925831502|3,177230901|1,64979693 |
 |4M          |8000      |1,935898056|3,01328558 |1,556531126|
+
+![speedup_omp](speedup_omp.png)

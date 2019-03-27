@@ -9,9 +9,11 @@ Programação Paralela Multithread
 
 - Especificações da arquitetura utilizada em [specs.txt](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/specs.txt)
 
-- Topologia da arquitetura utilizada em [lstopo.png]()
+- Topologia da arquitetura utilizada em [lstopo.png](lstopo.png)
 
 - Casos testados e speedups obtidos em [results.csv](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/results.csv)
+
+- Gráficos comparativos de desempenho no [fim da página](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/Entrega.md#desempenho-comparativo).
 
 ## Parte 1: Pthreads
 
@@ -22,7 +24,7 @@ Programação Paralela Multithread
    int end = start + wsize; // cálculo do index final para a thread
    ```
 
-   Comunicação: não há comunicação entre as threads enquanto elas efetuam as multiplicações, elas apenas somam o valor encontrado, por cada uma delas, na variável global. O trecho de código abaixo mostra o momento em que as threads incrementam o valor da soma encontrada no valor total. A operação que ocorre em [pthreads_dotprod.c](pthreads_dotprod/pthreads_dotprod.c) utiliza mutex para garantir exclusividade a cada thread no momento de acessar e incrementar a variável que guarda a soma total.
+   Comunicação: não há comunicação entre as threads enquanto elas efetuam as multiplicações, elas apenas somam o valor encontrado, por cada uma delas, na variável global. O trecho de código abaixo mostra o momento em que as threads incrementam o valor da soma encontrada no valor total. A operação que ocorre em [pthreads_dotprod.c](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/pthreads_dotprod/pthreads_dotprod.c) utiliza mutex para garantir exclusividade a cada thread no momento de acessar e incrementar a variável que guarda a soma total.
    ```
    pthread_mutex_lock (&mutexsum);
    dotdata.c += mysum;
@@ -35,17 +37,28 @@ Programação Paralela Multithread
 
 2. O speedup de 1 para 2 threads foi de 1.93, enquanto o speedup de 1 para 4 threads foi de 3.69 (o speedup de 2 para 4 threads foi de 1.91)
 
-3. O speedup para os casos do Pthreads se mantém bem semelhantes para 2 threads e com pequenas alterações para 4 threads. A variação realizada contemplou 3 tamanhos de vetores (1\*10^6, 2\*10^6 e 4\*10^6) e 3 quantidades de repetições (2000, 4000 e 8000). Os resultados para esses casos podem ser vistos na tabela no [diretório do Pthreads](https://github.com/lucasroges/elc139-2019a/tree/master/trabalhos/t2/pthreads_dotprod).
+3. O speedup para os casos do Pthreads se mantém bem semelhantes para 2 threads e com pequenas alterações para 4 threads. A variação realizada contemplou 3 tamanhos de vetores (1\*10^6, 2\*10^6 e 4\*10^6) e 3 quantidades de repetições (2000, 4000 e 8000). Os resultados para esses casos podem ser vistos no [diretório do Pthreads](https://github.com/lucasroges/elc139-2019a/tree/master/trabalhos/t2/pthreads_dotprod).
 
-4. 
+4. ![speedup_pthreads](pthreads_dotprod/speedup_pthreads.png)
 
-5. A diferença entre os códigos é que [pthreads_dotprod.c](pthreads_dotprod/pthreads_dotprod.c) utiliza um mecanismo do POSIX Threads, o mutex. O mutex deve ser inicializado e ao ser invocado por uma thread, através do comando lock, fará com que a thread execute exclusivamente uma região de código, enquanto as outras aguardam o desbloqueio, através de unlock, para também poderem executar a região exclusiva e seguir o processamento paralelo após essa região de código. Normalmente, mutexes são usados em regiões de manipulação de variáveis globais (região crítica), que é o caso do código em questão. O código de [pthreads_dotprod2.c](pthreads_dotprod/pthreads_dotprod2.c) não utiliza esse mecanismo, mas pode executar corretamente desde que a leitura efetuada pelas threads não ocorram simultaneamente.
+5. A diferença entre os códigos é que [pthreads_dotprod.c](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/pthreads_dotprod/pthreads_dotprod.c) utiliza um mecanismo do POSIX Threads, o mutex. O mutex deve ser inicializado e ao ser invocado por uma thread, através do comando lock, fará com que a thread execute exclusivamente uma região de código, enquanto as outras aguardam o desbloqueio, através de unlock, para também poderem executar a região exclusiva e seguir o processamento paralelo após essa região de código. Normalmente, mutexes são usados em regiões de manipulação de variáveis globais (região crítica), que é o caso do código em questão. O código de [pthreads_dotprod2.c](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/pthreads_dotprod/pthreads_dotprod2.c) não utiliza esse mecanismo, mas pode executar corretamente desde que a leitura efetuada pelas threads não ocorram simultaneamente.
 
 ## Parte 2: OpenMP
 
 1. Código implementado em C++ e disponível em [openmp_dotprod.cpp](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/openmp/openmp\_dotprod.cpp).
 
-2. Quanto ao speedup, para o caso de 2 threads é bem semelhante ao comportamento visto para o Pthreads, mas para 4 threads o speedup é mais baixo para todos os casos executados. Os resultados para esses casos podem ser vistos na tabela no [diretório do Pthreads](https://github.com/lucasroges/elc139-2019a/tree/master/trabalhos/t2/openmp).
+2. Quanto ao speedup, para o caso de 2 threads é bem semelhante ao comportamento visto para o Pthreads, mas para 4 threads o speedup é mais baixo para todos os casos executados. Os resultados para esses casos podem ser vistos no [diretório do OpenMP](https://github.com/lucasroges/elc139-2019a/tree/master/trabalhos/t2/openmp).
+
+## Desempenho comparativo
+
+Seguem 3 gráficos de comparação do tempo de execução para 3 tamanhos base de vetor: 1\*10^6, 2\*10^6 e 4\*10^6. Para cada tamanho de vetor (cada gráfico) há 3 quantidades de repetições dos cálculos: 2000, 4000 e 8000. Há a comparação de desempenho para as variáveis citadas entre o [código](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/pthreads_dotprod/pthreads_dotprod.c) utilizando Pthreads e o [código](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/openmp/openmp\_dotprod.cpp) utilizando OpenMP.
+
+![comparativo1M](comparação_1M.png)
+
+![comparativo2M](comparação_2M.png)
+
+![comparativo4M](comparação_4M.png)
+
 
 ## Referências
 

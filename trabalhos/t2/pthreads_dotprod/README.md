@@ -1,4 +1,4 @@
-[Programação Paralela](https://github.com/lucasroges/elc139-2019a) > T2 > Pthreads
+[Programação Paralela](https://github.com/lucasroges/elc139-2019a) > [T2](https://github.com/lucasroges/elc139-2019a/tree/master/trabalhos/t2) > Pthreads
 
 Programação Paralela Multithread
 --------------------------------
@@ -9,8 +9,8 @@ Programação Paralela Multithread
 
 ## Speedup para as execuções em Pthreads
 
-|Tamanho base|Repetições|2          |4          |4 (2 p/ 4) |
-|------------|----------|-----------|-----------|-----------|
+|Tamanho base|Repetições|     2     |     4     | 4 (2 p/ 4)|
+|:----------:|:--------:|:---------:|:---------:|:---------:|
 |1M          |2000      |1,934125176|3,691194535|1,908456898|
 |1M          |4000      |1,932195056|3,697975992|1,913873022|
 |1M          |8000      |1,930878161|3,677745789|1,904701116|
@@ -20,3 +20,5 @@ Programação Paralela Multithread
 |4M          |2000      |1,93201984 |3,675117972|1,902215441|
 |4M          |4000      |1,931379363|3,654850693|1,892352566|
 |4M          |8000      |1,932621245|3,629318158|1,87792521 |
+
+![speedup_pthreads](speedup_pthreads.png)
