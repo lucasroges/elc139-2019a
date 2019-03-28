@@ -7,11 +7,11 @@ Programação Paralela Multithread
 - Disciplina: Programação Paralela
 --------------------------------
 
-- Especificações da arquitetura utilizada em [specs.txt](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/specs.txt)
+- Especificações da arquitetura utilizada em [specs.txt](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/specs.txt).
 
-- Topologia da arquitetura utilizada em [lstopo.png](lstopo.png)
+- Topologia da arquitetura utilizada em [lstopo.png](lstopo.png).
 
-- Casos testados e resultados obtidos em [results.csv](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/results.csv)
+- Casos testados e resultados obtidos em [results.csv](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/results.csv).
 
 - Gráficos comparativos de desempenho no [fim da página](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/Entrega.md#desempenho-comparativo).
 
@@ -35,7 +35,7 @@ Programação Paralela Multithread
 
    Mapeamento: não há um mapeamento específico para os processadores, mas há um balanceamento de carga estático onde cada thread fica responsável por ```1/nthreads``` ou ```wsize``` das multiplicações, levando em consideração o tamanho total dos arrays.
 
-2. O speedup de 1 para 2 threads foi de 1.93, enquanto o speedup de 1 para 4 threads foi de 3.69 (o speedup de 2 para 4 threads foi de 1.91)
+2. O speedup de 1 para 2 threads foi de 1.93, enquanto o speedup de 1 para 4 threads foi de 3.69 (o speedup de 2 para 4 threads foi de 1.91).
 
 3. O speedup para os casos do Pthreads se mantém bem semelhantes para 2 threads e com pequenas alterações para 4 threads. A variação realizada contemplou 3 tamanhos de vetores (1\*10^6, 2\*10^6 e 4\*10^6) e 3 quantidades de repetições (2000, 4000 e 8000). Os resultados para esses casos podem ser vistos no [diretório do Pthreads](https://github.com/lucasroges/elc139-2019a/tree/master/trabalhos/t2/pthreads_dotprod).
 
