@@ -7,13 +7,13 @@
 
 ## Código
 
-- Código desenvolvido disponível em [OpenMPDemoABC.cpp](OpenMPDemoABD.cpp).
+- Código desenvolvido disponível em [OpenMPDemoABC.cpp](OpenMPDemoABC.cpp).
 
 ## Casos de teste
 
 - O número de threads permaneceu em 3 e o tamanho de chunk escolhido foi de `tamanho total / 10`, para todos os casos abaixo.
 
-- Além disso, foram realizadas execuções abrangendo todos os tipos de escalonamento solicitados na [descrição do trabalho](README.md).
+- Além disso, foram realizadas execuções abrangendo todos os tipos de escalonamento solicitados na [descrição do trabalho](README.md#trabalho).
 
 #### Comportamentos gerais
 
