@@ -123,15 +123,7 @@ public:
                 }
                 break;
             case 13:
-                std::cout << "Case 13: auto scheduling (with critical)" << std::endl;
-                #pragma omp parallel for shared(array) schedule(auto)
-                for (int i = 0; i < arraySize; i++) {
-                    #pragma omp critical
-                    array[i] = 'A' + omp_get_thread_num();
-                }
-                break;
-            case 14:
-                std::cout << "Case 14: auto scheduling (w/o critical)" << std::endl;
+                std::cout << "Case 13: auto scheduling (w/o critical)" << std::endl;
                 #pragma omp parallel for shared(array) schedule(auto)
                 for (int i = 0; i < arraySize; i++) {
                     array[i] = 'A' + omp_get_thread_num();
@@ -148,7 +140,7 @@ int main(int argc, char **argv) {
         std::cout << "Uso: ./OpenMPDemoABC <número de threads> <tamanho do array>" << std::endl;
     }
     Scheduling scheduling(atoi(argv[1]), atoi(argv[2]));
-    for (int i = 1; i <= 14; i++) {
+    for (int i = 1; i <= 13; i++) {
         scheduling.execs(i);
         scheduling.printResult();
     }
