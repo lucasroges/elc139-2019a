@@ -138,6 +138,7 @@ public:
 int main(int argc, char **argv) {
     if (argc < 3) {
         std::cout << "Uso: ./OpenMPDemoABC <número de threads> <tamanho do array>" << std::endl;
+        exit(-1);
     }
     Scheduling scheduling(atoi(argv[1]), atoi(argv[2]));
     for (int i = 1; i <= 13; i++) {

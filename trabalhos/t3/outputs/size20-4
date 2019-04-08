@@ -1,0 +1,26 @@
+Case 1: static scheduling (w/o critical)
+Result: AAAAAAABBBBBBBCCCCCC
+Case 2: static scheduling with chunks (w/o critical)
+Result: AABBCCAABBCCAABBCCAA
+Case 3: dynamic scheduling (with critical)
+Result: BACBBCABCACBCCABCBCA
+Case 4: dynamic scheduling (w/o critical)
+Result: BCCBCABACBACABCACBAC
+Case 5: dynamic scheduling with chunks (with critical)
+Result: CCAABBCCAACCBBCCBBAA
+Case 6: dynamic scheduling with chunks (w/o critical)
+Result: CCAACCAAAABBCCAABBCC
+Case 7: guided scheduling (with critical)
+Result: CCCCCCCAAAAABBBAABAB
+Case 8: guided scheduling (w/o critical)
+Result: AAAAAAACCCCCAAAAABAA
+Case 9: guided scheduling with chunks (with critical)
+Result: AAAAAAABBBBBCCCBBBBB
+Case 10: guided scheduling with chunks (w/o critical)
+Result: CCCCCCCCCCCCAAAAAAAA
+Case 11: runtime scheduling (with critical)
+Result: BCABCAABAABACABAABAB
+Case 12: runtime scheduling (w/o critical)
+Result: AABACBACABCABBACBCBA
+Case 13: auto scheduling (w/o critical)
+Result: AAAAAAABBBBBBBCCCCCC
