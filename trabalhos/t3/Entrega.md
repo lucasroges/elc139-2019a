@@ -17,13 +17,13 @@
 
 ### Observações
 
-- `static`: cada thread receberá `1/nthreads` de índices para preenchimento. Se houver tamanho de *chunk* especificado, as threads intercalarão o preenchimento do array de `chunkSize` índices em `chunkSize`.
+- `static`: cada thread receberá `1/nthreads` de índices para preenchimento. Se houver tamanho de *chunk* especificado, as threads intercalarão o preenchimento do array de `chunkSize` índices em `chunkSize` índices.
 
 - `dynamic`: tipo de escalonamento onde existem as maiores variações em como o vetor é preenchido. A utilização de *chunks* faz com que, se escalonada, a *thread* receba vários índices ao invés de um único. Diferentemente do escalonamento estático, pode ser que uma *thread* receba `n` *chunks* na sequência, preenchendo `n * chunkSize` índices adjacentes do vetor.
 
 - `guided`: tipo de escalonamento semelhante ao dinâmico, porém leva em consideração o quanto de trabalho restante ainda há para ser realizado, além da quantidade de *threads* disponíveis. Normalmente escalonará *chunks*, porém a tendência é de que o tamanho dos *chunks* diminuia. Se houver uma especificação de tamanho de *chunk*, o tamanho dos *chunks* finais será no mínimo esse, exceto no caso da quantidade de índices restantes ser menor que o tamanho de *chunk* definido.
 
-- `runtime`: definido por variável de ambiente `OMP_SCHEDULE` ou pela rotina `omp_set_schedule(omp_sched_t,chunkSize)`. Nos [*outputs*](outputs/) obtidos, não havia utilização de nenhuma dessas técnicas, portanto não houve controle sobre qual dos outros escalonamentos possíveis foi utilizado por `runtime`. Observando os [*outputs*](outputs/), a técnica semelhante ao comportamento visto é a de escalonamento dinâmico ou guiado.
+- `runtime`: definido por variável de ambiente `OMP_SCHEDULE` ou pela rotina `omp_set_schedule(omp_sched_t,chunkSize)`. Nas execuções realizadas não havia utilização de nenhuma dessas técnicas, portanto não houve controle sobre qual dos outros escalonamentos possíveis foi utilizado por `runtime`.
 
 - `auto`: por padrão (compilador e/ou SO), é definido como `static` e segue o comportamento do mesmo.
 

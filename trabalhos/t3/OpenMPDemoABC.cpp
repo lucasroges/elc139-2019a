@@ -50,7 +50,8 @@ public:
                     #pragma omp critical
                     {
                         array[index] = 'A' + omp_get_thread_num();
-                        index++;
+                        spendSomeTime();
+                    index++;
                     }
                 }
                 break;
@@ -59,6 +60,7 @@ public:
                 #pragma omp parallel for shared(array,index) schedule(static)
                 for (int i = 0; i < arraySize; ++i) {
                     array[index] = 'A' + omp_get_thread_num();
+                    spendSomeTime();
                     index++;
                 }
                 break;
@@ -69,7 +71,8 @@ public:
                     #pragma omp critical
                     {
                         array[index] = 'A' + omp_get_thread_num();
-                        index++;
+                        spendSomeTime();
+                    index++;
                     }
                 }
                 break;
@@ -78,6 +81,7 @@ public:
                 #pragma omp parallel for shared(array,index) schedule(static,chunkSize)
                 for (int i = 0; i < arraySize; ++i) {
                     array[index] = 'A' + omp_get_thread_num();
+                    spendSomeTime();
                     index++;
                 }
                 break;
@@ -88,7 +92,8 @@ public:
                     #pragma omp critical
                     {
                         array[index] = 'A' + omp_get_thread_num();
-                        index++;
+                        spendSomeTime();
+                    index++;
                     }
                 }
                 break;
@@ -97,6 +102,7 @@ public:
                 #pragma omp parallel for shared(array,index) schedule(dynamic)
                 for (int i = 0; i < arraySize; ++i) {
                     array[index] = 'A' + omp_get_thread_num();
+                    spendSomeTime();
                     index++;
                 }
                 break;
@@ -107,7 +113,8 @@ public:
                     #pragma omp critical
                     {
                         array[index] = 'A' + omp_get_thread_num();
-                        index++;
+                        spendSomeTime();
+                    index++;
                     }
                 }
                 break;
@@ -116,6 +123,7 @@ public:
                 #pragma omp parallel for shared(array,index) schedule(dynamic,chunkSize)
                 for (int i = 0; i < arraySize; ++i) {
                     array[index] = 'A' + omp_get_thread_num();
+                    spendSomeTime();
                     index++;
                 }
                 break;
@@ -126,7 +134,8 @@ public:
                     #pragma omp critical
                     {
                         array[index] = 'A' + omp_get_thread_num();
-                        index++;
+                        spendSomeTime();
+                    index++;
                     }
                 }
                 break;
@@ -135,6 +144,7 @@ public:
                 #pragma omp parallel for shared(array,index) schedule(guided)
                 for (int i = 0; i < arraySize; ++i) {
                     array[index] = 'A' + omp_get_thread_num();
+                    spendSomeTime();
                     index++;
                 }
                 break;
@@ -145,7 +155,8 @@ public:
                     #pragma omp critical
                     {
                         array[index] = 'A' + omp_get_thread_num();
-                        index++;
+                        spendSomeTime();
+                    index++;
                     }
                 }
                 break;
@@ -154,6 +165,7 @@ public:
                 #pragma omp parallel for shared(array,index) schedule(guided,chunkSize)
                 for (int i = 0; i < arraySize; ++i) {
                     array[index] = 'A' + omp_get_thread_num();
+                    spendSomeTime();
                     index++;
                 }
                 break;
@@ -164,7 +176,8 @@ public:
                     #pragma omp critical
                     {
                         array[index] = 'A' + omp_get_thread_num();
-                        index++;
+                        spendSomeTime();
+                    index++;
                     }
                 }
                 break;
@@ -173,14 +186,28 @@ public:
                 #pragma omp parallel for shared(array,index) schedule(runtime)
                 for (int i = 0; i < arraySize; ++i) {
                     array[index] = 'A' + omp_get_thread_num();
+                    spendSomeTime();
                     index++;
                 }
                 break;
             case 15:
-                std::cout << "Case 15: auto scheduling (w/o critical)" << std::endl;
+                std::cout << "Case 15: auto scheduling (with critical)" << std::endl;
                 #pragma omp parallel for shared(array,index) schedule(auto)
                 for (int i = 0; i < arraySize; ++i) {
+                    #pragma omp critical
+                    {
+                        array[index] = 'A' + omp_get_thread_num();
+                        spendSomeTime();
+                        index++;
+                    }
+                }
+                break;
+            case 16:
+                std::cout << "Case 16: auto scheduling (w/o critical)" << std::endl;
+#pragma omp parallel for shared(array,index) schedule(auto)
+                for (int i = 0; i < arraySize; ++i) {
                     array[index] = 'A' + omp_get_thread_num();
+                    spendSomeTime();
                     index++;
                 }
                 break;
@@ -196,7 +223,7 @@ int main(int argc, char **argv) {
         exit(-1);
     }
     Scheduling scheduling(atoi(argv[1]), atoi(argv[2]));
-    for (int i = 1; i <= 15; i++) {
+    for (int i = 1; i <= 16; i++) {
         scheduling.execs(i);
         scheduling.printResult();
     }
