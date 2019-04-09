@@ -3,7 +3,6 @@
 
 /*!
  * Scheduling class: executes all types of scheduling requested
- *
  */
 class Scheduling{
 private:
@@ -11,10 +10,12 @@ private:
     int nThreads;
     int arraySize;
     int chunkSize;
+    int index;
 public:
     Scheduling(int nThreads, int arraySize) : arraySize(arraySize), nThreads(nThreads), chunkSize(arraySize/10) {
         array = new char[arraySize];
         omp_set_num_threads(nThreads);
+        index = 0;
     }
 
     ~Scheduling() {
@@ -28,105 +29,174 @@ public:
     void printResult() {
         std::cout << "Result: " << std::string(array, arraySize) << std::endl;
         dashFilling();
+        index = 0;
+    }
+
+    void spendSomeTime() {
+        for (int i = 0; i < 10000; ++i) {
+            for (int j = 0; j < 100; ++j) {
+
+            }
+        }
     }
 
     void execs(int _case) {
         dashFilling();
         switch (_case) {
             case 1:
-                std::cout << "Case 1: static scheduling (w/o critical)" << std::endl;
+                std::cout << "Case 1: static scheduling (with critical)" << std::endl;
                 #pragma omp parallel for shared(array) schedule(static)
-                for (int i = 0; i < arraySize; i++) {
-                    array[i] = 'A' + omp_get_thread_num();
+                for (int i = 0; i < arraySize; ++i) {
+                    #pragma omp critical
+                    {
+                        array[index] = 'A' + omp_get_thread_num();
+                        index++;
+                        
+                    }
                 }
                 break;
             case 2:
-                std::cout << "Case 2: static scheduling with chunks (w/o critical)" << std::endl;
-                #pragma omp parallel for shared(array) schedule(static,chunkSize)
-                for (int i = 0; i < arraySize; i++) {
-                    array[i] = 'A' + omp_get_thread_num();
+                std::cout << "Case 2: static scheduling (w/o critical)" << std::endl;
+                #pragma omp parallel for shared(array) schedule(static)
+                for (int i = 0; i < arraySize; ++i) {
+                    array[index] = 'A' + omp_get_thread_num();
+                    index++;
+                    
                 }
                 break;
             case 3:
-                std::cout << "Case 3: dynamic scheduling (with critical)" << std::endl;
-                #pragma omp parallel for shared(array) schedule(dynamic)
-                for (int i = 0; i < arraySize; i++) {
+                std::cout << "Case 3: static scheduling with chunks (with critical)" << std::endl;
+                #pragma omp parallel for shared(array) schedule(static,chunkSize)
+                for (int i = 0; i < arraySize; ++i) {
                     #pragma omp critical
-                    array[i] = 'A' + omp_get_thread_num();
+                    {
+                        array[index] = 'A' + omp_get_thread_num();
+                        index++;
+                        
+                    }
                 }
                 break;
             case 4:
-                std::cout << "Case 4: dynamic scheduling (w/o critical)" << std::endl;
-                #pragma omp parallel for shared(array) schedule(dynamic)
-                for (int i = 0; i < arraySize; i++) {
-                    array[i] = 'A' + omp_get_thread_num();
+                std::cout << "Case 4: static scheduling with chunks (w/o critical)" << std::endl;
+                #pragma omp parallel for shared(array) schedule(static,chunkSize)
+                for (int i = 0; i < arraySize; ++i) {
+                    array[index] = 'A' + omp_get_thread_num();
+                    index++;
+                    
                 }
                 break;
             case 5:
-                std::cout << "Case 5: dynamic scheduling with chunks (with critical)" << std::endl;
-                #pragma omp parallel for shared(array) schedule(dynamic,chunkSize)
-                for (int i = 0; i < arraySize; i++) {
+                std::cout << "Case 5: dynamic scheduling (with critical)" << std::endl;
+                #pragma omp parallel for shared(array) schedule(dynamic)
+                for (int i = 0; i < arraySize; ++i) {
                     #pragma omp critical
-                    array[i] = 'A' + omp_get_thread_num();
+                    {
+                        array[index] = 'A' + omp_get_thread_num();
+                        index++;
+                        
+                    }
                 }
                 break;
             case 6:
-                std::cout << "Case 6: dynamic scheduling with chunks (w/o critical)" << std::endl;
-                #pragma omp parallel for shared(array) schedule(dynamic,chunkSize)
-                for (int i = 0; i < arraySize; i++) {
-                    array[i] = 'A' + omp_get_thread_num();
+                std::cout << "Case 6: dynamic scheduling (w/o critical)" << std::endl;
+                #pragma omp parallel for shared(array) schedule(dynamic)
+                for (int i = 0; i < arraySize; ++i) {
+                    array[index] = 'A' + omp_get_thread_num();
+                    index++;
+                    
                 }
                 break;
             case 7:
-                std::cout << "Case 7: guided scheduling (with critical)" << std::endl;
-                #pragma omp parallel for shared(array) schedule(guided)
-                for (int i = 0; i < arraySize; i++) {
+                std::cout << "Case 7: dynamic scheduling with chunks (with critical)" << std::endl;
+                #pragma omp parallel for shared(array) schedule(dynamic,chunkSize)
+                for (int i = 0; i < arraySize; ++i) {
                     #pragma omp critical
-                    array[i] = 'A' + omp_get_thread_num();
+                    {
+                        array[index] = 'A' + omp_get_thread_num();
+                        index++;
+                        
+                    }
                 }
                 break;
             case 8:
-                std::cout << "Case 8: guided scheduling (w/o critical)" << std::endl;
-                #pragma omp parallel for shared(array) schedule(guided)
-                for (int i = 0; i < arraySize; i++) {
-                    array[i] = 'A' + omp_get_thread_num();
+                std::cout << "Case 8: dynamic scheduling with chunks (w/o critical)" << std::endl;
+                #pragma omp parallel for shared(array) schedule(dynamic,chunkSize)
+                for (int i = 0; i < arraySize; ++i) {
+                    array[index] = 'A' + omp_get_thread_num();
+                    index++;
+                    
                 }
                 break;
             case 9:
-                std::cout << "Case 9: guided scheduling with chunks (with critical)" << std::endl;
-                #pragma omp parallel for shared(array) schedule(guided,chunkSize)
-                for (int i = 0; i < arraySize; i++) {
+                std::cout << "Case 9: guided scheduling (with critical)" << std::endl;
+                #pragma omp parallel for shared(array) schedule(guided)
+                for (int i = 0; i < arraySize; ++i) {
                     #pragma omp critical
-                    array[i] = 'A' + omp_get_thread_num();
+                    {
+                        array[index] = 'A' + omp_get_thread_num();
+                        index++;
+                        
+                    }
                 }
                 break;
             case 10:
-                std::cout << "Case 10: guided scheduling with chunks (w/o critical)" << std::endl;
-                #pragma omp parallel for shared(array) schedule(guided,chunkSize)
-                for (int i = 0; i < arraySize; i++) {
-                    array[i] = 'A' + omp_get_thread_num();
+                std::cout << "Case 10: guided scheduling (w/o critical)" << std::endl;
+                #pragma omp parallel for shared(array) schedule(guided)
+                for (int i = 0; i < arraySize; ++i) {
+                    array[index] = 'A' + omp_get_thread_num();
+                    index++;
+                    
                 }
                 break;
             case 11:
-                std::cout << "Case 11: runtime scheduling (with critical)" << std::endl;
-                #pragma omp parallel for shared(array) schedule(runtime)
-                for (int i = 0; i < arraySize; i++) {
+                std::cout << "Case 11: guided scheduling with chunks (with critical)" << std::endl;
+                #pragma omp parallel for shared(array) schedule(guided,chunkSize)
+                for (int i = 0; i < arraySize; ++i) {
                     #pragma omp critical
-                    array[i] = 'A' + omp_get_thread_num();
+                    {
+                        array[index] = 'A' + omp_get_thread_num();
+                        index++;
+                        
+                    }
                 }
                 break;
             case 12:
-                std::cout << "Case 12: runtime scheduling (w/o critical)" << std::endl;
-                #pragma omp parallel for shared(array) schedule(runtime)
-                for (int i = 0; i < arraySize; i++) {
-                    array[i] = 'A' + omp_get_thread_num();
+                std::cout << "Case 12: guided scheduling with chunks (w/o critical)" << std::endl;
+                #pragma omp parallel for shared(array) schedule(guided,chunkSize)
+                for (int i = 0; i < arraySize; ++i) {
+                    array[index] = 'A' + omp_get_thread_num();
+                    index++;
+                    
                 }
                 break;
             case 13:
-                std::cout << "Case 13: auto scheduling (w/o critical)" << std::endl;
+                std::cout << "Case 13: runtime scheduling (with critical)" << std::endl;
+                #pragma omp parallel for shared(array) schedule(runtime)
+                for (int i = 0; i < arraySize; ++i) {
+                    #pragma omp critical
+                    {
+                        array[index] = 'A' + omp_get_thread_num();
+                        index++;
+                        
+                    }
+                }
+                break;
+            case 14:
+                std::cout << "Case 14: runtime scheduling (w/o critical)" << std::endl;
+                #pragma omp parallel for shared(array) schedule(runtime)
+                for (int i = 0; i < arraySize; ++i) {
+                    array[index] = 'A' + omp_get_thread_num();
+                    index++;
+                    
+                }
+                break;
+            case 15:
+                std::cout << "Case 15: auto scheduling (w/o critical)" << std::endl;
                 #pragma omp parallel for shared(array) schedule(auto)
-                for (int i = 0; i < arraySize; i++) {
-                    array[i] = 'A' + omp_get_thread_num();
+                for (int i = 0; i < arraySize; ++i) {
+                    array[index] = 'A' + omp_get_thread_num();
+                    index++;
+                    
                 }
                 break;
             default:
@@ -141,20 +211,9 @@ int main(int argc, char **argv) {
         exit(-1);
     }
     Scheduling scheduling(atoi(argv[1]), atoi(argv[2]));
-    for (int i = 1; i <= 13; i++) {
+    for (int i = 1; i <= 15; i++) {
         scheduling.execs(i);
         scheduling.printResult();
     }
     return 0;
 }
-
-/*! omp_set_num_threads(atoi(argv[1]));
-    int size = atoi(argv[2]);
-    char *array = new char[size];
-    std::fill(array, array + size, '-');
-    int i;
-#pragma omp parallel for shared(i,array) schedule()
-    for (i = 0; i < size; i++) {
-        array[i] = 'A' + omp_get_thread_num();
-    }
-    std::cout << std::string(array, size) << std::endl; */
