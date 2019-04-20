@@ -27,5 +27,5 @@
 - [Boas Práticas para Experimentos Computacionais em Clusters de Alto Desempenho](https://github.com/viniciusvgp/tutorial-mc-erad-2019)  
   Tutorial auxiliar na geração *scripts* para fases de experimentação, coleta dos dados, análise e geração de gráficos.
 
-- [CDER](https://help.rs.gsu.edu/display/PD/CDER)
+- [CDER](https://help.rs.gsu.edu/display/PD/CDER)  
   Configurações do *cluster* disponibilizado para as execuções.
