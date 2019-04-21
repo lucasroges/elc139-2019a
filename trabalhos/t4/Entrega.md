@@ -14,7 +14,7 @@
 
 ## Slides
 
-- A apresentação de *slides* preparada para o trabalho pode ser encontrada [aqui](t4.pdf).
+<!--- A apresentação de *slides* preparada para o trabalho pode ser encontrada [aqui](t4.pdf).-->
 
 ## Referências
 
