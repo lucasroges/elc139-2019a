@@ -39,5 +39,5 @@ int main(int argc,char *argv[])
       rc = MPI_Send(&outmsg, 1, MPI_INT, dest, tag, MPI_COMM_WORLD);
       printf("Enviei mensagem para processo %d...\n", dest);
    }
-
+   MPI_Finalize();
 }
