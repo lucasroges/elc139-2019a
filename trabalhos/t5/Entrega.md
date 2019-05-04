@@ -1,3 +1,4 @@
+
 [Programação Paralela](https://github.com/lucasroges/elc139-2019a) > T5
 
 # Primeiros passos com MPI
@@ -6,10 +7,15 @@
 - Disciplina: Programação Paralela
 
 ## Parte 1
-- O programa solicitado está implementado em [parte1.cpp](parte1.cpp). Houve a utilização da operação de redução, assim como no [código do t2](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/openmp/openmp_dotprod.cpp), que no MPI é implementada através da função `MPI_Reduce`.
+O programa solicitado está implementado em [parte1.cpp](parte1.cpp). Houve a utilização da operação de redução, assim como no [código do t2](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/openmp/openmp_dotprod.cpp), que no MPI é implementada através da função `MPI_Reduce`.
+
+Speedup observado:
+
+![speedup_mpi](speedup_mpi.png)
+
 
 ## Parte 2
-- O programa solicitado está implementado em [parte2.cpp](parte2.cpp). O programa escolhe um número aleatório no início da execução e realiza os passos descritos.
+O programa solicitado está implementado em [parte2.cpp](parte2.cpp). O programa escolhe um número aleatório no início da execução e realiza os passos descritos.
 
 ## Parte 3
 
