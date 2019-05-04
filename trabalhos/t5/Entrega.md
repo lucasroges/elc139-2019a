@@ -9,10 +9,13 @@
 ## Parte 1
 O programa solicitado está implementado em [parte1.cpp](parte1.cpp). Houve a utilização da operação de redução, assim como no [código do t2](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/openmp/openmp_dotprod.cpp), que no MPI é implementada através da função `MPI_Reduce`.
 
+Os resultados obtidos estão em [results.csv](results.csv).
+
 Speedup observado:
 
 ![speedup_mpi](speedup_mpi.png)
 
+Speedups anteriores: [PThreads](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/pthreads_dotprod/speedup_pthreads.png) e [OpenMP](https://github.com/lucasroges/elc139-2019a/blob/master/trabalhos/t2/openmp/speedup_omp.png).
 
 ## Parte 2
 O programa solicitado está implementado em [parte2.cpp](parte2.cpp). O programa escolhe um número aleatório no início da execução e realiza os passos descritos.
