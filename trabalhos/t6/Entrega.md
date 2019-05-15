@@ -7,7 +7,7 @@
 - Disciplina: Programação Paralela
 
 ## Parte 1
-O programa solicitado encontra-se em [parte1.cpp](parte1.cpp).
+O programa solicitado encontra-se em [parte1.c](parte1.c).
 
 <!--TODO: CODIGO E EXPLICAÇÃO-->
 
