@@ -13,11 +13,23 @@ Foram realizados testes de comparação entre as duas implementações variando 
 
 ![parte1](parte1.png)
 
+Há um aumento do tempo de execução de acordo com o aumento do número de processos, o que ocorre porque a aplicação é basicamente comunicação. Dessa forma, não havendo processamento para se beneficiar do paralelismo, e sim apenas um aumento de mensagens a serem trocadas, o que ocasiona o aumento no tempo de execução.
+
 ## Parte 2
 
 Nessa seção, as modificações entre as execuções abrangeram a mudança de tamanho do vetor (tamanhos 512, 1024 e 2048), do número de processos (1 a 256), da largura de banda (125 e 250) e da latência (5 e 10). Os gráficos abaixo ilustram o comportamento dos casos executados.
 
-<!-- inserir gráficos -->
+Gráfico para o vetor de tamanho 512:
+
+![parte2-512](parte2-512.png)
+
+Gráfico para o vetor de tamanho 1024:
+
+![parte2-1024](parte2-1024.png)
+
+Gráfico para o vetor de tamanho 2048:
+
+![parte2-2048](parte2-2048.png)
 
 ## Referências
 
