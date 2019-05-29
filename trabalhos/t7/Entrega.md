@@ -11,8 +11,7 @@ Código para a utilização do *broadcast* nativo: [coll_bcast.c](coll_bcast.c).
 
 Foram realizados testes de comparação entre as duas implementações variando o número de processos entre 2 e 256, utilizando as configurações de simulação disponobilizadas. O gráfico abaixo mostra como se comportou o tempo de execução de acordo com o aumento do número de processos.
 
-<!-- inserir gráfico -->
-
+![parte1](parte1.png)
 
 ## Parte 2
 
