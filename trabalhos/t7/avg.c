@@ -29,18 +29,18 @@ float compute_avg(float *array, int num_elements) {
 }
 
 int main(int argc, char** argv) {
-  if (argc != 2) {
+  if (argc != 4) {
     fprintf(stderr, "Usage: avg num_elements_per_proc\n");
     exit(1);
   }
   
   double start_time_mpi, end_time_mpi;
 
-  int num_elements_per_proc = atoi(argv[1]);
+  int num_elements_per_proc = atoi(argv[3]);
   // Seed the random number generator to get different results each time
   srand(time(NULL));
 
-  MPI_Init(NULL, NULL);
+  MPI_Init(&argc, &argv);
 
   int world_rank;
   MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
