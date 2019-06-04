@@ -19,7 +19,18 @@ As médias e os erros para as execuções da parte 1 podem ser vistos, detalhada
 
 ## Parte 2
 
-Nessa seção, as modificações entre as execuções abrangeram a mudança de tamanho do vetor (tamanhos 512, 1024 e 2048), do número de processos (1 a 256), da largura de banda (125 e 250) e da latência (5 e 10). Os gráficos abaixo ilustram o comportamento dos casos executados.
+Nessa seção, as modificações entre as execuções abrangeram a mudança de tamanho do vetor (tamanhos 512, 1024 e 2048), do número de processos (1 a 256), e dos parâmetros do cluster. 
+
+Configuração dos clusters:
+
+| Cluster | Bandwidth | Latency |
+|:-------:|:---------:|:-------:|
+|    1    |  125Mbps  |   5μs   |
+|    2    |  125Mbps  |  1000μs |
+|    3    |    5Bps   |   5μs   |
+|    4    |    5Bps   |  1000μs |
+
+Os gráficos abaixo ilustram o comportamento dos casos executados.
 
 Gráfico para o vetor de tamanho 512:
 
