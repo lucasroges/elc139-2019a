@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH -J t8p1             # job name
-#SBATCH -o t8p1%j.out       # output file name (%j expands to jobID), this file captures standered output from the shell
-#SBATCH -e t8p1%j.err       # error file name (%j expands to jobID), this file captures standered errors genereted from the program
+#SBATCH -J t8p2             # job name
+#SBATCH -o t8p2%j.out       # output file name (%j expands to jobID), this file captures standered output from the shell
+#SBATCH -e t8p2%j.err       # error file name (%j expands to jobID), this file captures standered errors genereted from the program
 #SBATCH --nodes 1           # total number of nodes requested
 #SBATCH --ntasks-per-node 1 # total number cores requested per node. Using this option and --node option above you could fine tune resource requests.
 #SBATCH -p qCDER            # partition --qCDER (to find out available partitions please run 'sinfo' command)
@@ -9,33 +9,25 @@
 #SBATCH -t 08:00:00         # run time (hh:mm:ss) - 8 hours
 
 # Setar projeto de execuções
-PROJETO=t8p1exp.csv
+PROJETO=t8p2exp.csv
 
 # Ler o projeto experimental, e para cada experimento
 tail -n +2 $PROJETO |
-while IFS=, read -r name runnoinstdorder runno runnostdrp code width frames Blocks
+while IFS=, read -r name runnoinstdorder runno runnostdrp width frames threads Blocks
 do
     # Limpar valores
     export name=$(echo $name | sed "s/\"//g")
-    export code=$(echo $code | sed "s/\"//g")
     export width=$(echo $width | sed "s/\"//g")
     export frames=$(echo $frames | sed "s/\"//g")
+    export threads=$(echo $threads | sed "s/\"//g")
 
     # Definir uma chave única
-    KEY="$name-$code-$width-$frames"
+    KEY="$name-$width-$frames-$threads"
 
-    compile=""
-    nvprof=""
+    compile="nvcc wavecuda2.cu -o wave"
+    nvprof="nvprof --log-file logs/nvprof-$KEY"
 
-    # Configurações de compilação
-    if [ "$code" = "wave" ]; then
-        compile+="g++ wave.cpp -o wave"       
-    else
-        compile+="nvcc ${code}.cu -o wave"
-        nvprof+="nvprof --log-file logs/nvprof-$KEY"
-    fi
-
-    # Compilar o programa com a versão de código apropriada
+    # Compilar o programa
     echo "Compiling >> $compile <<"
     eval "$compile"
     ls -l wave
@@ -46,7 +38,7 @@ do
 
     # Prepara comando de execução
     runline=""
-    runline+="$nvprof ./wave $width $frames "
+    runline+="$nvprof ./wave $width $frames $threads "
 
     runline+="> logs/${KEY}.log"
 

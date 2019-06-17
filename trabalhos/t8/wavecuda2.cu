@@ -20,6 +20,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 Author: Martin Burtscher
 Revision history:
 20190610   andreainfufsm   Replaced the function to calculate the color of each pixel
+20190615   lucasroges      CUDA parallel version
 */
 
 #include <cstdlib>
@@ -31,11 +32,10 @@ Revision history:
 __global__
 void calculatePixels(int width, int frames, unsigned char* pic)
 {
-  //int index = threadIdx.x;
-  //int offset = blockDim.x;
-  //for (int frame = index; frame < frames; frame += offset) {
+  int index = blockIdx.x * blockDim.x + threadIdx.x;
+  int offset = blockDim.x * gridDim.x;
   for (int frame = 0; frame < frames; frame++) {
-    for (int row = 0; row < width; row++) {
+    for (int row = index; row < width; row += offset) {
       for (int col = 0; col < width; col++) {
         float fx = col - 1024/2;
         float fy = row - 1024/2;
@@ -43,7 +43,6 @@ void calculatePixels(int width, int frames, unsigned char* pic)
         unsigned char color = (unsigned char) (160.0f + 127.0f *
                                           cos(d/10.0f - frame/7.0f) /
                                           (d/50.0f + 1.0f));
-
         pic[frame * width * width + row * width + col] = (unsigned char) color;
       }
     }
@@ -54,24 +53,27 @@ int main(int argc, char *argv[])
 {
 
   // check command line
-  if (argc != 3) {fprintf(stderr, "usage: %s frame_width num_frames\n", argv[0]); exit(-1);}
+  if (argc != 4) {fprintf(stderr, "usage: %s frame_width num_frames num_threads\n", argv[0]); exit(-1);}
   int width = atoi(argv[1]);
   if (width < 100) {fprintf(stderr, "error: frame_width must be at least 100\n"); exit(-1);}
   int frames = atoi(argv[2]);
   if (frames < 1) {fprintf(stderr, "error: num_frames must be at least 1\n"); exit(-1);}
-  printf("computing %d frames of %d by %d picture\n", frames, width, width);
+  int threads = atoi(argv[3]);
+  if (threads < 1) {fprintf(stderr, "error: num_threads must be at least 1\n"); exit(-1);};
+  printf("computing %d frames of %d by %d picture with %d blocks of %d threads\n", frames, width, width, (width + threads - 1) / threads, threads);
 
   // allocate picture array
-  //unsigned char* pic = new unsigned char[frames * width * width];
-  
   unsigned char* pic;
   cudaMallocManaged(&pic, frames*width*width*sizeof(unsigned char));
     
   // start time
   timeval start, end;
   gettimeofday(&start, NULL);
+    
+  int blockSize = threads;
+  int numBlocks = (width + blockSize - 1) / blockSize;
 
-  calculatePixels<<<1, 1>>>(width, frames, pic);
+  calculatePixels<<<numBlocks, blockSize>>>(width, frames, pic);
 
   // Wait for GPU to finish before accessing on host
   cudaDeviceSynchronize();

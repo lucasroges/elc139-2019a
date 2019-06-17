@@ -32,8 +32,8 @@ Revision history:
 __global__
 void calculatePixels(int width, int frames, unsigned char* pic)
 {
-  int index = threadIdx.x;
-  int offset = blockDim.x;
+  int index = threadIdx.x; // id da thread
+  int offset = blockDim.x; // tamanho do bloco (número total de threads, nesse caso)
   for (int frame = index; frame < frames; frame += offset) {
   //for (int frame = 0; frame < frames; frame++) {
     for (int row = 0; row < width; row++) {
