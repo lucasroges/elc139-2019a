@@ -31,7 +31,7 @@ Esses parâmetros foram executados para o código sequencial em C++, sequencial 
 
 #### Ambiente de execução
 
-O ambiente de execução escolhido para testar a aplicação foi o *cluster* CDER. Alguns nós do *cluster* apresentam GPU, porém o único em que foi possível executar o script foi o `cder01`. Dessa forma foi criado o script [run.sh](parte1/run.sh) e executado através do comando:
+O ambiente de execução escolhido para testar a aplicação foi o *cluster* CDER. Alguns nós do *cluster* apresentam GPU, porém o único em que foi possível executar o *script* foi o `cder01`. Dessa forma foi criado o *script* [run.sh](parte1/run.sh) e executado através do comando:
 
 ```
 sbatch --nodelist=cder01 run.sh
@@ -39,7 +39,7 @@ sbatch --nodelist=cder01 run.sh
 
 #### Resultados
 
-Após a execução, os resultados foram agrupados no arquivo [resultadosp1.csv](parte1/resultadosp1.csv) e esses dados foram utilizado para visualizar o speedup do código implementado na figura abaixo:
+Após a execução, os resultados foram agrupados no arquivo [resultadosp1.csv](parte1/resultadosp1.csv) e esses dados foram utilizados para visualizar o *speedup* do código implementado na figura abaixo:
 
 ![speedup-p1](parte1/speedup-parte1.png)
 
@@ -65,13 +65,17 @@ Esses parâmetros são os mesmos escolhidos para a parte 1. Assim, na parte 2 fo
 
 #### Ambiente de execução
 
-O ambiente de execução é o mesmo da parte 1 e o script utilizado foi o [run.sh](parte2/run.sh).
+O ambiente de execução é o mesmo da parte 1 e o *script* utilizado foi o [run.sh](parte2/run.sh).
 
 #### Resultados
 
-Após a execução, os resultados foram agrupados no arquivo [resultadosp1.csv](parte2/resultadosp2.csv) e esses dados foram utilizado para visualizar o speedup do código implementado na figura abaixo:
+Após a execução, os resultados foram agrupados no arquivo [resultadosp2.csv](parte2/resultadosp2.csv) e esses dados foram utilizado para visualizar o speedup do código implementado na figura abaixo:
 
 ![speedup-p2](parte2/speedup-parte2.png)
+
+A eficiência da paralelização é maior do que na parte 1, considerando o código sequencial em CUDA.
+
+A variação de *threads* por bloco (16, 32, 64, 128, 256) não ocasionou em médias de tempo muito diferentes, então esses resultados foram agrupados para montar o gráfico de *speedup* acima. 
 
 ## Referências
 
